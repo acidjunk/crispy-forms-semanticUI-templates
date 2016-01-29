@@ -1,6 +1,6 @@
 # crispy-forms-semanticUI-templates
 crispy-forms-semanticUI-templates a set of templates that can be used to get semantic UI
-
+Tested with Semantic-UI 2.1.7
 
 To use it:
 copy the semantic-ui folder to your main templates folder in your django app.
