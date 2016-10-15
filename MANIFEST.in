@@ -1,0 +1,2 @@
+# Include the data files
+recursive-include crispy_forms_semantic_ui *
