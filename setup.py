@@ -3,11 +3,13 @@ from setuptools import setup, find_packages
 
 from crispy_forms_semantic_ui import __version__
 
-with open(os.path.join(os.path.dirname(__file__), 'README_PIP.md')) as readme:
+APPNAME = 'crispy-forms-semantic-ui'
+
+with open(os.path.join(os.path.dirname(__file__), APPNAME.replace('-','_'), 'README')) as readme:
     README = readme.read()
 
 setup(
-    name='crispy-forms-semantic-ui',
+    name=APPNAME,
     version='.'.join(map(str, __version__)),
     packages=find_packages(),
     include_package_data=True,
