@@ -5,7 +5,7 @@ from crispy_forms_semantic_ui import __version__
 
 APPNAME = 'crispy-forms-semantic-ui'
 
-with open(os.path.join(os.path.dirname(__file__), APPNAME.replace('-','_'), 'README')) as readme:
+with open(os.path.join(os.path.dirname(__file__), APPNAME.replace('-','_'), 'README.rst')) as readme:
     README = readme.read()
 
 setup(
@@ -13,7 +13,7 @@ setup(
     version='.'.join(map(str, __version__)),
     packages=find_packages(),
     include_package_data=True,
-    license='BSD License',
+    license='GPLv3 License',
     description='Semantic UI templates for django-crispy-forms.',
     long_description=README,
     keywords='django crispy-forms semantic-ui forms',
