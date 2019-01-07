@@ -1,0 +1,34 @@
+{% load crispy_forms_field %}
+
+{% if field.is_hidden %}
+    {{ field }}
+{% else %}
+    <div id="div_{{ field.auto_id }}" class="{% if field.field.required %}required{% endif %}{% if 'form-horizontal' in form_class %} inline{% endif %} field{% if wrapper_class %} {{ wrapper_class }}{% endif %}{% if form_group_wrapper_class %} {{ form_group_wrapper_class }}{% endif %}{% if form_show_errors and field.errors %} error{% endif %}{% if field.css_classes %} {{ field.css_classes }}{% endif %}">
+
+        {% if field.label and form_show_labels %}
+            <label for="{{ field.id_for_label }}" class="{{ label_class }}">
+                {{ field.label|safe }}
+            </label>
+        {% endif %}
+
+        <div class="{{ field_class }}">
+            <div class="ui{% if crispy_appended_text %} right{% endif %} labeled input">
+                {% if crispy_prepended_text %}
+                  <div class="ui label{% if active %} active{% endif %}{% if input_size %} {{ input_size }}{% endif %}">
+                    {{ crispy_prepended_text|safe }}
+                  </div>
+                {% endif %}
+                {% crispy_field field %}
+                {% if crispy_appended_text %}
+                  <div class="ui label{% if active %} active{% endif %}{% if input_size %} {{ input_size }}{% endif %}">
+                    {{ crispy_appended_text|safe }}
+                  </div>
+                {% endif %}
+            </div>
+
+            {% include 'semantic-ui/layout/help_text_and_errors.html' %}
+        </div>
+
+    </div>
+{% endif %}
+

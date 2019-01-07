@@ -1,0 +1,8 @@
+{% if field.help_text %}
+    {% if help_text_inline %}
+        <div id="hint_{{ field.auto_id }}" class="ui basic segment help">{{ field.help_text|safe }}</div>
+    {% else %}
+        <div id="hint_{{ field.auto_id }}" class="ui basic segment help">{{ field.help_text|safe }}</div>
+    {% endif %}
+{% endif %}
+

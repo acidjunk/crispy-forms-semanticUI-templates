@@ -3,29 +3,53 @@
 {% if field.is_hidden %}
     {{ field }}
 {% else %}
-    <div id="div_{{ field.auto_id }}" class="{% if field.required %}required {% endif %}field{% if field.errors and form_show_errors %} error{% endif %}{% if field|is_checkbox %} checkbox{% endif %}">
-
-        {% if form_show_errors %}
-            {% for error in field.errors %}
-                <div id="error_{{ forloop.counter }}_{{ field.auto_id }}" class="ui small negative message">
-                    <div class="header">Error in {{ field.name }}</div>
-                    {{ error }}
-                </div>
-            {% endfor %}
+    {% if field|is_checkbox %}
+    <div class="{% if field.field.required %} required{% endif %}{% if 'form-horizontal' in form_class %} inline {% endif %}field">
+        {% if label_class %}
+            <div class="{% for offset in bootstrap_checkbox_offsets %}{{ offset }} {% endfor %}{{ field_class }}">
         {% endif %}
-
-        {% if field.label %}
-            <label for="{{ field.id_for_label }}" {% if field.field.required %}class="requiredField"{% endif %}>
-                {{ field.label|safe }}{% if field.field.required %}<span class="asteriskField">*</span>{% endif %}
+    {% endif %}
+    <{% if tag %}{{ tag }}{% else %}div{% endif %} id="div_{{ field.auto_id }}" class="{% if not field|is_checkbox %}{% if field.field.required %}required{% endif %}{% if 'form-horizontal' in form_class %} inline{% endif %} field{% endif %}{% if wrapper_class %} {{ wrapper_class }}{% endif %}{% if field.css_classes %} {{ field.css_classes }}{% endif %}">
+        {% if field.label and not field|is_checkbox and form_show_labels %}
+            <label for="{{ field.id_for_label }}" class="{{ label_class }}">
+                {{ field.label|safe }}
             </label>
         {% endif %}
 
-        {% crispy_field field %}
-
-        {% if field.help_text %}
-            <div id="hint_{{ field.auto_id }}" class="formHint">{{ field.help_text|safe }}</div>
+        {% if field|is_select %}
+            {% include 'semantic-ui/layout/dropdown.html' %}
         {% endif %}
 
+        {% if field|is_checkboxselectmultiple %}
+            {% include 'semantic-ui/layout/checkboxselectmultiple.html' %}
+        {% endif %}
 
-    </div>
+        {% if field|is_radioselect %}
+            {% include 'semantic-ui/layout/radioselect.html' %}
+        {% endif %}
+
+        {% if not field|is_select and not field|is_checkboxselectmultiple and not field|is_radioselect %}
+            {% if field|is_checkbox and form_show_labels %}
+                <label for="{{ field.id_for_label }}" class="form-check-label">
+                    {% crispy_field field 'class' 'form-check-input' %}
+                    {{ field.label|safe }}
+                </label>
+                {% include 'semantic-ui/layout/help_text_and_errors.html' %}
+            {% elif field|is_file %}
+                {% include 'semantic/layout/field_file.html' %}
+            {% else %}
+                <div class="{{ field_class }}">
+                    {% crispy_field field %}
+                    {% include 'semantic-ui/layout/help_text_and_errors.html' %}
+                </div>
+            {% endif %}
+        {% endif %}
+
+    </{% if tag %}{{ tag }}{% else %}div{% endif %}>
+    {% if field|is_checkbox %}
+        {% if label_class %}
+            </div>
+        {% endif %}
+        </div>
+    {% endif %}
 {% endif %}
