@@ -23,3 +23,23 @@ Any help to complete it is appeciated.
 1. `pip install crispy-forms-semantic-ui`
 
 2. set `semantic-ui` as your `CRISPY_TEMPLATE_PACK` in your projects' `settings.py`
+
+### Generic install steps
+
+3. add `crispy_forms_semantic_ui` to your `INSTALLED_APPS`:
+
+```python
+INSTALLED_APPS = [
+    ...
+    'crispy_forms',
+    'crispy_forms_semantic_ui',
+    ...
+]
+```
+
+4. Add `semantic-ui` to the allowed `CRISPY_ALLOWED_TEMPLATE_PACKS` array in your `settings`:
+
+```python
+CRISPY_ALLOWED_TEMPLATE_PACKS = ('bootstrap', 'uni_form', 'bootstrap3',
+                                 'bootstrap4', 'semantic-ui',)
+```
